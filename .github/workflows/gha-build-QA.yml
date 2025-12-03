@@ -35,12 +35,12 @@ jobs:
           url: docker.io/SampleApp/SampleApp-Backend-15:${{ env.artifact_version }}
           type: "docker"
           cloudbees-url: "https://api.saas-qa.beescloud.com"
-          cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          cloudbees-pat: ${{ secrets.BT_USER_PAT_GHA }}
             
       - name: Publish evidence
         uses: cloudbees-io-gha/publish-evidence-item@v2
         with:
-          cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          cloudbees-pat: ${{ secrets.BT_USER_PAT_GHA }}
           cloudbees-url: "https://api.saas-qa.beescloud.com"
           content: |-
             Build Completed and artifacts published to Cloudbees platform
@@ -67,13 +67,13 @@ jobs:
           test-type: GO
           results-path: test-results/results.json
           cloudbees-url: "https://api.saas-qa.beescloud.com"
-          # cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          # cloudbees-pat: ${{ secrets.BT_USER_PAT_GHA }}
           
       - name: Publish evidence
         uses: cloudbees-io-gha/publish-evidence-item@v2
         with:
           cloudbees-url: "https://api.saas-qa.beescloud.com"
-          # cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          # cloudbees-pat: ${{ secrets.BT_USER_PAT_GHA }}
           content: |-
             Testing Completed and results published to Cloudbees platform
             Test | Results |
@@ -95,7 +95,7 @@ jobs:
         id: deploy
         with :
           cloudbees-url: "https://api.saas-qa.beescloud.com"
-          cloudbees-pat: ${{ secrets.CBP_PAT_QA }}
+          cloudbees-pat: ${{ secrets.BT_USER_PAT_GHA }}
           branch-name: "main"
           workflow-file-name: "cbp-deploy.yaml"
           workflow-inputs: '{"artifactName": "SampleApp-Backend-15","artifactVersion": "${{ env.artifact_version }}", "environment": "QA", "artifactId" : "${{needs.build.outputs.artifactId}}"}'
